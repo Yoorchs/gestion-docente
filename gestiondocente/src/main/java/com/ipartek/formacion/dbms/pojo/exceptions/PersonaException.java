@@ -13,6 +13,10 @@ package com.ipartek.formacion.dbms.pojo.exceptions;
  */
 public class PersonaException extends Exception {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	public final static int COD_DNI_ERROR = 500;
 	public final static int COD_EDAD_ERROR = 510;
 	public final static int COD_LONGITUD_NOMBRE = 520;
@@ -21,6 +25,7 @@ public class PersonaException extends Exception {
 	public final static String MSG_EDAD_ERROR = "Debe de ser mayor de 18 años";
 	public final static String MSG_LONGITUD_NOMBRE = "El nombre introducido debe de tener tres letras o mas";
 	private int codigo;
+	@SuppressWarnings("unused")
 	private String mensaje;
 
 	public PersonaException(int codigo, String mensaje) {
