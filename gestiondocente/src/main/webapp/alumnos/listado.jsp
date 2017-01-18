@@ -1,3 +1,4 @@
+<%@page import="com.ipartek.formacion.controller.Constantes"%>
 <%@page import="com.ipartek.formacion.dbms.pojo.Alumno"%>
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -14,7 +15,7 @@
 	<%
 	/* Esto es un scriptlet */
 	// Recogemos el atributo de la request
-	List<Alumno> alumnos = (List<Alumno>) request.getAttribute("listado-alumnos");
+	List<Alumno> alumnos = (List<Alumno>) request.getAttribute(Constantes.ATT_LISTADO_ALUMNOS);
 	for (Alumno alumno: alumnos){
 		out.println(alumno.toString());
 	}

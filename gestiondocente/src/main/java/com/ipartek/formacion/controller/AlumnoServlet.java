@@ -39,9 +39,9 @@ public class AlumnoServlet extends HttpServlet {
 		// Obtenemos el listado de alumos 
 		List<Alumno> alumnos = aS.getAll();
 		// fijamos la pagina dedestino
-		RequestDispatcher rd = request.getRequestDispatcher("alumnos/listado.jsp");
+		RequestDispatcher rd = request.getRequestDispatcher(Constantes.JSP_LISTADO_ALUMNOS);
 		// Añadimos el atributo a la request
-		request.setAttribute("listado-alumnos", alumnos);
+		request.setAttribute(Constantes.ATT_LISTADO_ALUMNOS, alumnos);
 		// Hace la redireccion
 		rd.forward(request, response);
 

@@ -20,6 +20,7 @@ import com.ipartek.formacion.service.ProfesorServiceImp;
 public class ProfesorServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
     private ProfesorService pS;
+    private RequestDispatcher rd;
 	
     /**
      * @see HttpServlet#HttpServlet()
@@ -39,9 +40,9 @@ public class ProfesorServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// Creamos un mapa y o corgamos con los valores de los profesores de ProfesorserviceImp
 		Map<Integer, Profesor> profesores = pS.getAll();
-		RequestDispatcher rd = request.getRequestDispatcher("profesores/listado.jsp");
+		rd = request.getRequestDispatcher(Constantes.JSP_LISTADO_PROFESORES);
 		// Añadimos el atributo a la request
-		request.setAttribute("listado-profesores", profesores);
+		request.setAttribute(Constantes.ATT_LISTADO_PROFESORES, profesores);
 		// Hace la redireccion
 		rd.forward(request, response);
 	}

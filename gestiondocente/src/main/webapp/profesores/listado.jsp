@@ -1,3 +1,4 @@
+<%@page import="com.ipartek.formacion.controller.Constantes"%>
 <%@page import="java.util.Map"%>
 <%@page import="com.ipartek.formacion.dbms.pojo.Profesor"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -14,10 +15,9 @@
 	<%
 	/* Esto es un scriptlet */
 	// Recogemos el atributo de la request
-	Map<Integer, Profesor> profesores = (Map<Integer, Profesor>) request.getAttribute("listado-profesores");
-	
+	Map<Integer, Profesor> profesores = (Map<Integer, Profesor>) request.getAttribute(Constantes.ATT_LISTADO_PROFESORES);
 	for (Map.Entry<Integer, Profesor> entry : profesores.entrySet()) {
-	    out.println("Clave del profesor =" + entry.getKey() + ", Email =" + entry.getValue().getEmail());
+	    out.println( "<p>" + entry.getValue().toString() + "</p>");
 	}
 	%>	
 	</main>
