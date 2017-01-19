@@ -16,8 +16,12 @@
 	/* Esto es un scriptlet */
 	// Recogemos el atributo de la request
 	List<Alumno> alumnos = (List<Alumno>) request.getAttribute(Constantes.ATT_LISTADO_ALUMNOS);
+	// CRUD
+	%>
+	<a href="<%= Constantes.SERVLET_ALUMNO %>?<%=Constantes.PAR_OPERACION %>">Crear Alumno</a>
+	<%
 	for (Alumno alumno: alumnos){
-		out.println(alumno.toString());
+		out.println("<p>" + alumno.toString() + "</p>");
 	}
 	%>	
 	</main>
