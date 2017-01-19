@@ -18,7 +18,7 @@
 	List<Alumno> alumnos = (List<Alumno>) request.getAttribute(Constantes.ATT_LISTADO_ALUMNOS);
 	// CRUD
 	%>
-	<a href="<%= Constantes.SERVLET_ALUMNO %>?<%=Constantes.PAR_OPERACION %>">Crear Alumno</a>
+	<a href="<%= Constantes.SERVLET_ALUMNO %>?<%=Constantes.PAR_OPERACION %>=<%=Constantes.OP_CREATE %>">Crear Alumno</a>
 	<%
 	for (Alumno alumno: alumnos){
 		out.println("<p>" + alumno.toString() + "</p>");

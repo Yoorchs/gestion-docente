@@ -1,6 +1,7 @@
 package com.ipartek.formacion.controller;
 
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.List;
 
 import javax.servlet.RequestDispatcher;
@@ -61,6 +62,7 @@ public class AlumnoServlet extends HttpServlet {
 			// cargarListaAlumnos(request);	
 			// Se redirige a la pagina principal en caso de que haya un error en el parametro de la request
 			response.sendRedirect(Constantes.JSP_HOME); 
+			return;
 		}
 		// Hace la redireccion
 		rd.forward(request, response);
@@ -81,10 +83,49 @@ public class AlumnoServlet extends HttpServlet {
 
 
 	@Override
-	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-	
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		Alumno alumno = null;
+		try {
+			String mensaje ="";
+			alumno = recogerParametros(request);
+			//Procesaremos UPDATE o INSERT
+			if (alumno.getCodigo()>Alumno.CODIGO_NULO){ // Update
+				aS.update(alumno);
+				mensaje = "El alumno se ha actualizado OK";
+			}else { // Create
+				aS.create(alumno);
+				mensaje = "El alumno se ha creado OK";
+			}
+		} catch (Exception e) {
+			//Redirigimos al formulario con el dispatcher
+			rd = request.getRequestDispatcher("alumnos/alumno.jsp");
+			request.setAttribute("mensaje", e.getMessage());
+		}
+		rd.forward(request, response);
 	}
 	
+	private Alumno recogerParametros(HttpServletRequest request) throws Exception {
+		Alumno alumno = new Alumno();
+		try {
+			alumno.setCodigo(Integer.parseInt(request.getParameter(Constantes.PAR_CODIGO)));
+			alumno.setNombre(request.getParameter(Constantes.PAR_NOMBRE));
+			alumno.setApellidos(request.getParameter(Constantes.PAR_APELLIDOS));
+			alumno.setDireccion(request.getParameter(Constantes.PAR_DIRECCION));
+			alumno.setDni(request.getParameter(Constantes.PAR_DNI));
+			alumno.setEmail(request.getParameter(Constantes.PAR_EMAIL));
+			alumno.setnHermanos(Integer.parseInt(Constantes.PAR_NHERMANOS));
+			alumno.setActivo(Boolean.parseBoolean(Constantes.PAR_ACTIVO));
+			String fechaNacimiento = request.getParameter(Constantes.PAR_FNACIMIENTO);
+			String pattern = "dd/MM/yy";
+			SimpleDateFormat dateformat = new SimpleDateFormat(pattern);
+			alumno.setfNacimiento(dateformat.parse(fechaNacimiento));
+			
+		}catch (Exception e) {
+			throw new Exception("Los datos no son validos");
+		}
+		return alumno;
+	}
+
 	@Override
 	public void destroy() {
 		aS = null;
