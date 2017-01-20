@@ -21,9 +21,9 @@ public class PersonaException extends Exception {
 	public final static int COD_EDAD_ERROR = 510;
 	public final static int COD_LONGITUD_NOMBRE = 520;
 
-	public final static String MSG_DNI_ERROR = "El DNI introducido no es valido";
-	public final static String MSG_EDAD_ERROR = "Debe de ser mayor de 18 años";
-	public final static String MSG_LONGITUD_NOMBRE = "El nombre introducido debe de tener tres letras o mas";
+	public final static String MSG_DNI_ERROR = "El DNI introducido no es valido ";
+	public final static String MSG_EDAD_ERROR = "Debe de ser mayor de 18 años ";
+	public final static String MSG_LONGITUD_NOMBRE = "El nombre introducido debe de tener tres letras o mas ";
 	private int codigo;
 
 	public PersonaException(int codigo, String mensaje) {

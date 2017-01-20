@@ -44,7 +44,7 @@ public class AlumnoServlet extends HttpServlet {
 			switch (op) {
 			case Constantes.OP_CREATE:
 				//Se va a redirigir a la pagina alumnos/alumno.jsp
-				rd = request.getRequestDispatcher(Constantes.JSP_CREAR_ALUMNO);
+				rd = request.getRequestDispatcher(Constantes.JSP_FORMULARIO_ALUMNO);
 				break;
 			case Constantes.OP_READ:
 				cargarListaAlumnos(request);
@@ -52,7 +52,7 @@ public class AlumnoServlet extends HttpServlet {
 			case Constantes.OP_UPDATE:
 				//aS = getById(codigo);
 				//Se va a redirigir a la pagina alumnos/alumno.jsp
-				rd = request.getRequestDispatcher(Constantes.JSP_CREAR_ALUMNO);
+				rd = request.getRequestDispatcher(Constantes.JSP_FORMULARIO_ALUMNO);
 				break;
 			default:
 				cargarListaAlumnos(request);
@@ -85,22 +85,23 @@ public class AlumnoServlet extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		Alumno alumno = null;
+		String mensaje ="";
 		try {
-			String mensaje ="";
 			alumno = recogerParametros(request);
 			//Procesaremos UPDATE o INSERT
 			if (alumno.getCodigo()>Alumno.CODIGO_NULO){ // Update
 				aS.update(alumno);
-				mensaje = "El alumno se ha actualizado OK";
+				mensaje = " El alumno se ha actualizado OK";
 			}else { // Create
 				aS.create(alumno);
-				mensaje = "El alumno se ha creado OK";
+				mensaje = " El alumno se ha creado OK";
 			}
 		} catch (Exception e) {
 			//Redirigimos al formulario con el dispatcher
-			rd = request.getRequestDispatcher("alumnos/alumno.jsp");
-			request.setAttribute("mensaje", e.getMessage());
+			rd = request.getRequestDispatcher(Constantes.JSP_FORMULARIO_ALUMNO);
+			mensaje = e.getMessage();
 		}
+		request.setAttribute(Constantes.ATT_MENSAJE, mensaje);
 		rd.forward(request, response);
 	}
 	
@@ -113,7 +114,11 @@ public class AlumnoServlet extends HttpServlet {
 			alumno.setDireccion(request.getParameter(Constantes.PAR_DIRECCION));
 			alumno.setDni(request.getParameter(Constantes.PAR_DNI));
 			alumno.setEmail(request.getParameter(Constantes.PAR_EMAIL));
-			alumno.setnHermanos(Integer.parseInt(Constantes.PAR_NHERMANOS));
+			
+			String hermanos  = request.getParameter(Constantes.PAR_NHERMANOS);
+			if ("".equalsIgnoreCase(hermanos)) {
+				hermanos = "0";
+			}
 			alumno.setActivo(Boolean.parseBoolean(Constantes.PAR_ACTIVO));
 			String fechaNacimiento = request.getParameter(Constantes.PAR_FNACIMIENTO);
 			String pattern = "dd/MM/yy";
@@ -121,7 +126,7 @@ public class AlumnoServlet extends HttpServlet {
 			alumno.setfNacimiento(dateformat.parse(fechaNacimiento));
 			
 		}catch (Exception e) {
-			throw new Exception("Los datos no son validos");
+			throw new Exception(" Los datos no son validos " + e.getMessage());
 		}
 		return alumno;
 	}

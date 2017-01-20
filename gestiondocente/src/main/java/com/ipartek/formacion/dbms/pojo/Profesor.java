@@ -30,9 +30,9 @@ public class Profesor extends Persona {
 	@Override
 	public String toString() {
 		// TODO Auto-generated method stub
-		return this.codigo + " " + this.getApellidos() + " " 
+		return this.codigo + " "  + this.getNombre() + " " + this.getApellidos() + " " 
 		+ this.getDireccion() + " " + this.getDni() + " " 
-		+ this.getEmail() + " " + this.getNombre() + " " + this.getnSS();
+		+ this.getEmail() + " " + this.getnSS();
 	}
 
 }
