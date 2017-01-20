@@ -89,7 +89,7 @@ public class ProfesorServlet extends HttpServlet {
 				pS.create(profesor);
 				mensaje = "Profesor creado OK ";
 				}
-			
+			cargarListadoProfesores(request);
 		} catch (Exception e) {
 			// Redireccion al formulario del profesor
 			rd = request.getRequestDispatcher(Constantes.JSP_FORMULARIO_PROFESOR);
@@ -108,9 +108,14 @@ public class ProfesorServlet extends HttpServlet {
 			profesor.setDni(request.getParameter(Constantes.PAR_DNI));
 			profesor.setEmail(request.getParameter(Constantes.PAR_EMAIL));
 			String fNacimiento = request.getParameter(Constantes.PAR_FNACIMIENTO);
-			String pattern = "dd/MM/yy";
+			String pattern = "dd/MM/yyyy";
 			SimpleDateFormat format = new SimpleDateFormat(pattern);
 			profesor.setfNacimiento(format.parse(fNacimiento));
+			String nSS_s = request.getParameter(Constantes.PAR_NSS);
+			if (nSS_s != null && !"".equals(nSS_s)) {
+				int nSS = Integer.parseInt(nSS_s);
+				profesor.setnSS(nSS);
+			}
 			
 		} catch (Exception e) {
 			throw new Exception( "Los datos no son correctos " + e.getMessage());
