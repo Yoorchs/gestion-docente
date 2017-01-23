@@ -57,8 +57,8 @@ public class ProfesorServlet extends HttpServlet {
 					Profesor profesor = pS.getById(codigo);
 					request.setAttribute(Constantes.ATT_PROFESOR, profesor);
 					rd = request.getRequestDispatcher(Constantes.JSP_FORMULARIO_PROFESOR);
-					break;
 					}
+					break;
 				case Constantes.OP_DELETE:
 					{
 					int codigo = -1;
@@ -66,8 +66,8 @@ public class ProfesorServlet extends HttpServlet {
 					pS.delete(codigo);
 					request.setAttribute(Constantes.ATT_MENSAJE, "Profesor despedido");
 					cargarListadoProfesores(request);
-					break;
 					}
+					break;
 			default:
 				cargarListadoProfesores(request);
 				break;
