@@ -50,10 +50,24 @@ public class AlumnoServlet extends HttpServlet {
 				cargarListaAlumnos(request);
 				break;
 			case Constantes.OP_UPDATE:
-				//aS = getById(codigo);
+				{	
+				int codigo = -1;
+				codigo = Integer.parseInt(request.getParameter(Constantes.PAR_CODIGO));
+				Alumno alumno = aS.getById(codigo);
+				request.setAttribute(Constantes.ATT_ALUMNO, alumno);
 				//Se va a redirigir a la pagina alumnos/alumno.jsp
 				rd = request.getRequestDispatcher(Constantes.JSP_FORMULARIO_ALUMNO);
 				break;
+			}
+			case Constantes.OP_DELETE:
+				{	
+				int codigo = -1;
+				codigo = Integer.parseInt(request.getParameter(Constantes.PAR_CODIGO));
+				aS.delete(codigo);
+				request.setAttribute(Constantes.ATT_MENSAJE, "El alumno se ha dado de baja");
+				cargarListaAlumnos(request);
+				break;
+			}
 			default:
 				cargarListaAlumnos(request);
 				break;
@@ -85,8 +99,10 @@ public class AlumnoServlet extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		Alumno alumno = null;
+		int codigo = -1;
 		String mensaje ="";
 		try {
+			codigo = Integer.parseInt(request.getParameter(Constantes.PAR_CODIGO));
 			alumno = recogerParametros(request);
 			//Procesaremos UPDATE o INSERT
 			if (alumno.getCodigo()>Alumno.CODIGO_NULO){ // Update
@@ -96,10 +112,20 @@ public class AlumnoServlet extends HttpServlet {
 				aS.create(alumno);
 				mensaje = " El alumno se ha creado OK";
 			}
+			cargarListaAlumnos(request);
 		} catch (Exception e) {
 			//Redirigimos al formulario con el dispatcher
 			rd = request.getRequestDispatcher(Constantes.JSP_FORMULARIO_ALUMNO);
-			mensaje = e.getMessage();
+			mensaje = "Operacion inesperada";
+			if (codigo == -1) {
+				rd = request.getRequestDispatcher(Constantes.JSP_LISTADO_ALUMNOS);
+			} else {
+				alumno = aS.getById(codigo);
+				rd = request.getRequestDispatcher(Constantes.JSP_FORMULARIO_ALUMNO);
+				request.setAttribute(Constantes.ATT_ALUMNO, alumno);
+				mensaje = e.getMessage();
+			}
+			System.out.println(mensaje);
 		}
 		request.setAttribute(Constantes.ATT_MENSAJE, mensaje);
 		rd.forward(request, response);
@@ -119,6 +145,7 @@ public class AlumnoServlet extends HttpServlet {
 			if ("".equalsIgnoreCase(hermanos)) {
 				hermanos = "0";
 			}
+			alumno.setnHermanos(Integer.parseInt(hermanos));
 			alumno.setActivo(Boolean.parseBoolean(Constantes.PAR_ACTIVO));
 			String fechaNacimiento = request.getParameter(Constantes.PAR_FNACIMIENTO);
 			String pattern = "dd/MM/yy";

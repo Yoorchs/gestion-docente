@@ -51,13 +51,29 @@ public class ProfesorServlet extends HttpServlet {
 					cargarListadoProfesores(request);
 					break;
 				case Constantes.OP_UPDATE:
+					{
+					int codigo = -1;
+					codigo = Integer.parseInt(request.getParameter(Constantes.PAR_CODIGO));
+					Profesor profesor = pS.getById(codigo);
+					request.setAttribute(Constantes.ATT_PROFESOR, profesor);
 					rd = request.getRequestDispatcher(Constantes.JSP_FORMULARIO_PROFESOR);
 					break;
+					}
+				case Constantes.OP_DELETE:
+					{
+					int codigo = -1;
+					codigo = Integer.parseInt(request.getParameter(Constantes.PAR_CODIGO));
+					pS.delete(codigo);
+					request.setAttribute(Constantes.ATT_MENSAJE, "Profesor despedido");
+					cargarListadoProfesores(request);
+					break;
+					}
 			default:
 				cargarListadoProfesores(request);
 				break;
 			}
 		} catch (Exception e) {
+			e.printStackTrace();
 			response.sendRedirect(Constantes.JSP_HOME);
 			return;
 		}
