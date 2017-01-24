@@ -110,7 +110,6 @@ public class AlumnoServiceImp implements AlumnoService {
 			posicion = buscarAlumno(codigo);
 			alumnos.remove(posicion);
 		} catch (AlumnoServiceImpException e) {
-
 			System.out.println(e.getMessage());
 		}
 

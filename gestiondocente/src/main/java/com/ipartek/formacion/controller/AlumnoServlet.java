@@ -58,7 +58,7 @@ public class AlumnoServlet extends HttpServlet {
 				//Se va a redirigir a la pagina alumnos/alumno.jsp
 				rd = request.getRequestDispatcher(Constantes.JSP_FORMULARIO_ALUMNO);
 				break;
-			}
+				}
 			case Constantes.OP_DELETE:
 				{	
 				int codigo = -1;
@@ -67,7 +67,7 @@ public class AlumnoServlet extends HttpServlet {
 				request.setAttribute(Constantes.ATT_MENSAJE, "El alumno se ha dado de baja");
 				cargarListaAlumnos(request);
 				break;
-			}
+				}
 			default:
 				cargarListaAlumnos(request);
 				break;
@@ -148,7 +148,7 @@ public class AlumnoServlet extends HttpServlet {
 			alumno.setnHermanos(Integer.parseInt(hermanos));
 			alumno.setActivo(Boolean.parseBoolean(Constantes.PAR_ACTIVO));
 			String fechaNacimiento = request.getParameter(Constantes.PAR_FNACIMIENTO);
-			String pattern = "dd/MM/yy";
+			String pattern = "dd/MM/yyyy";
 			SimpleDateFormat dateformat = new SimpleDateFormat(pattern);
 			alumno.setfNacimiento(dateformat.parse(fechaNacimiento));
 			
