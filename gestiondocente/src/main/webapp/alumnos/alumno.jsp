@@ -1,6 +1,7 @@
-<%@page import="java.util.GregorianCalendar"%>
-<%@page import="com.ipartek.formacion.dbms.pojo.Alumno"%>
-<%@page import="com.ipartek.formacion.controller.Constantes"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %> 
+<%@ page import="java.util.GregorianCalendar"%>
+<%@ page import="com.ipartek.formacion.dbms.pojo.Alumno"%>
+<%@ page import="com.ipartek.formacion.controller.Constantes"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <jsp:include page="../includes/header.jsp"></jsp:include>

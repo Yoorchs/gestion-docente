@@ -1,4 +1,5 @@
 <%@page import="java.lang.reflect.Method"%>
+<%@page import="java.util.GregorianCalendar"%>
 <%@page import="com.ipartek.formacion.controller.Constantes"%>
 <%@page import="com.ipartek.formacion.dbms.pojo.Curso"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -24,7 +25,24 @@
 		</div>
 		<div>
 			<label for="<%=Constantes.PAR_DURACION%>">Duracion: </label>
-			<input type="text" placeholder="Introduzca la duracion del curso..."  name="<%= Constantes.PAR_DURACION%>" id="<%= Constantes.PAR_DURACION%>" value="<%=curso.getDuracion()%>">
+			<input type="number" placeholder="Introduzca la duracion del curso..."  name="<%= Constantes.PAR_DURACION%>" id="<%= Constantes.PAR_DURACION%>" value="<%=curso.getDuracion()%>">
+		</div>
+		<%
+		String dateIn = "";
+		String dateFin = "";
+		GregorianCalendar gc = new GregorianCalendar();
+		gc.setTime(curso.getfInicio());
+		dateIn = gc.get(GregorianCalendar.DAY_OF_MONTH) + "/" + gc.get(GregorianCalendar.MONTH) +1  + "/" + gc.get(GregorianCalendar.YEAR);
+		gc.setTime(curso.getfFinalizacion());
+		dateFin = gc.get(GregorianCalendar.DAY_OF_MONTH) + "/" + gc.get(GregorianCalendar.MONTH) +1  + "/" + gc.get(GregorianCalendar.YEAR);
+		%>
+		<div>
+			<label for="<%=Constantes.PAR_FINICIO%>">Fecha de Inicio: </label>
+			<input type="text" placeholder="Introduzca la fecha de inicio del curso..."  name="<%= Constantes.PAR_FINICIO%>" id="<%= Constantes.PAR_FINICIO%>" value="<%=dateIn%>">
+		</div>
+		<div>
+			<label for="<%=Constantes.PAR_FFIN%>">Fecha de Finalizacion: </label>
+			<input type="text" placeholder="Introduzca la fecha de finalizacion del curso..."  name="<%= Constantes.PAR_FFIN%>" id="<%= Constantes.PAR_FFIN%>" value="<%=dateFin%>">
 		</div>
 		<input type="submit" value="Enviar" />
 	</form>

@@ -2,24 +2,23 @@ package com.ipartek.formacion.service;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import com.ipartek.formacion.dbms.pojo.Alumno;
+//import com.ipartek.formacion.dbms.pojo.Alumno;
 import com.ipartek.formacion.dbms.pojo.Curso;
-import com.ipartek.formacion.dbms.pojo.Profesor;
+//import com.ipartek.formacion.dbms.pojo.Profesor;
 import com.ipartek.formacion.service.exceptions.CursoServiceImpException;
 
 public class CursoserviceImp implements CursoService {
 
 	private static int i = 0;
 	private List<Curso> cursos;
-	private ArrayList<Alumno> alumnos;
-	private Profesor profesor;
+	// private ArrayList<Alumno> alumnos;
+	// private Profesor profesor;
 	
 	public CursoserviceImp() {
 		super();
 		cursos = new ArrayList<Curso>();
-		alumnos = new ArrayList<Alumno>();
-		profesor = new Profesor();
+		// alumnos = new ArrayList<Alumno>();
+		// profesor = new Profesor();
 		init();
 	}
 
@@ -33,7 +32,7 @@ public class CursoserviceImp implements CursoService {
 	@Override
 	public Curso create(Curso curso) {
 		curso.setCodigo(i);
-		i= i++;
+		i++;
 		cursos.add(curso);
 		return curso;
 	}
@@ -58,7 +57,7 @@ public class CursoserviceImp implements CursoService {
 		boolean encontrado = false;
 		while (encontrado == false && i<cursos.size()) {
 			Curso aux = cursos.get(i);
-			if (aux.getCodigo() ==i){
+			if (aux.getCodigo() == codigo){
 				encontrado = true;
 				posicion = i;
 			}

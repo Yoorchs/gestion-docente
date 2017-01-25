@@ -1,14 +1,17 @@
 package com.ipartek.formacion.dbms.pojo;
 
+import java.io.Serializable;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-public class Curso {
+public class Curso implements Serializable, Comparable<Curso>{
 
 	/**
 	 * 
 	 */
+	private static final long serialVersionUID = 1L;
 	public static final int CODIGO_NULO = -1;
 	private int codigo;
 	private String nombre;
@@ -27,7 +30,7 @@ public class Curso {
 		this.fInicio = new Date();
 		this.fFinalizacion = new Date();
 		this.alumnos = new ArrayList<Alumno>();
-		this.profesor = null;
+		this.profesor = new Profesor();
 	}
 
 	public String getNombre() {
@@ -90,6 +93,23 @@ public class Curso {
 	public String toString() {
 		return "Curso [Codigo del curso=" + codigo + ", Nombre del curso=" + nombre + ", Duracion=" + duracion + ", Fecha de Inicio=" + fInicio
 				+ ", Fecha de finalizacion=" + fFinalizacion + ", Alumnos matriculados=" + alumnos + ", Profesor=" + profesor + "]";
+	}
+
+	@Override
+	public int compareTo(Curso o) {
+		return this.nombre.compareToIgnoreCase(o.getNombre());
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		boolean iguales = false;
+		if (obj instanceof Curso){
+			Curso curso = (Curso) obj;
+			if (this.codigo == curso.getCodigo()){
+				iguales = true;
+			}
+		}
+		return iguales;
 	}
 	
 }

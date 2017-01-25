@@ -15,6 +15,7 @@
 				+ Constantes.OP_DELETE + "&" + Constantes.PAR_CODIGO + "=" + curso.getCodigo() + ">Borrar </a>";
 		String btnEdit = "<a href=" + Constantes.SERVLET_CURSO + "?" + Constantes.PAR_OPERACION  + "=" 
 				+ Constantes.OP_UPDATE + "&" + Constantes.PAR_CODIGO + "="  + curso.getCodigo() + "> Editar </a>";
+		
 		out.println("<p>" + curso.toString() + btnEdit + btnDelete + " </p>");
 	} %>
 </main>

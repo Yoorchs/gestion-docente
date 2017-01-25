@@ -100,7 +100,6 @@ public class AlumnoServiceImp implements AlumnoService {
 			System.out.println(e.getMessage());
 			alumno = new Alumno();
 		}
-
 		return alumno;
 	}
 

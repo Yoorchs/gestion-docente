@@ -1,17 +1,13 @@
 package com.ipartek.formacion.controller;
 
 import java.io.IOException;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.List;
-
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
-import com.ipartek.formacion.dbms.pojo.Alumno;
 import com.ipartek.formacion.dbms.pojo.Curso;
 import com.ipartek.formacion.service.CursoserviceImp;
 
@@ -45,8 +41,7 @@ public class CursoServlet extends HttpServlet{
 				break;
 			case Constantes.OP_DELETE:
 				{
-				int codigo = -1;
-				codigo = Integer.parseInt(req.getParameter(Constantes.PAR_CODIGO));
+				int codigo = Integer.parseInt(req.getParameter(Constantes.PAR_CODIGO));
 				cS.delete(codigo);
 				req.setAttribute(Constantes.ATT_MENSAJE, "Curso eliminado");
 				cargarListaCursos(req);
@@ -54,9 +49,9 @@ public class CursoServlet extends HttpServlet{
 				}
 			case Constantes.OP_UPDATE:
 				{
-				int codigo = -1;
-				codigo = Integer.parseInt(req.getParameter(Constantes.PAR_CODIGO));
+				int codigo = Integer.parseInt(req.getParameter(Constantes.PAR_CODIGO));
 				Curso curso = cS.getById(codigo);
+				System.out.println(curso.toString());
 				req.setAttribute(Constantes.ATT_CURSO, curso);
 				rd = req.getRequestDispatcher(Constantes.JSP_FORMULARIO_CURSO);
 				break;	
@@ -79,14 +74,14 @@ public class CursoServlet extends HttpServlet{
 	}
 	
 	@Override
-	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException, NumberFormatException {
 		Curso curso = null;
 		int codigo = - 1;
 		String mensaje = "";
-		
 		try {
 			codigo = Integer.parseInt(req.getParameter(Constantes.PAR_CODIGO));
 			curso = recogerParametros(req);	
+			curso.setCodigo(codigo);
 			if (curso.getCodigo()>Curso.CODIGO_NULO){
 				cS.update(curso);
 				mensaje = "Curso actualizado";
@@ -106,7 +101,7 @@ public class CursoServlet extends HttpServlet{
 				req.setAttribute(Constantes.ATT_CURSO, curso);
 				mensaje = e.getMessage();
 			}
-			System.out.println(mensaje);
+			System.out.println("Error " + mensaje);
 		}
 		req.setAttribute(Constantes.ATT_MENSAJE, mensaje);
 		rd.forward(req, resp);
@@ -117,20 +112,24 @@ public class CursoServlet extends HttpServlet{
 		try {
 			curso.setCodigo(Integer.parseInt(req.getParameter(Constantes.PAR_CODIGO)));
 			curso.setNombre(req.getParameter(Constantes.PAR_NOMBRE));
-			curso.setDuracion(Integer.parseInt(Constantes.PAR_DURACION));
+			curso.setDuracion(Integer.parseInt(req.getParameter(Constantes.PAR_DURACION)));
 			// Fechas con sus formatos
-			String finicio = req.getParameter(Constantes.PAR_FINICIO);
 			String pattern = "dd/MM/yyyy";
 			SimpleDateFormat dateformat = new SimpleDateFormat(pattern);
-			curso.setfInicio(dateformat.parse(finicio));
+			String finicio = req.getParameter(Constantes.PAR_FINICIO);
 			String ffin = req.getParameter(Constantes.PAR_FFIN);
-			curso.setfFinalizacion(dateformat.parse(ffin));
-			
+			if (finicio != null && ! "".equalsIgnoreCase(finicio)){
+				curso.setfInicio(dateformat.parse(finicio));	
+			}
+			if (ffin!= null && ! "".equalsIgnoreCase(ffin)){
+				curso.setfFinalizacion(dateformat.parse(ffin));
+			}
 			// curso.setAlumnos( req.getParameter(Constantes.PAR_LISTADO_ALUMNOS));
 			// curso.setProfesor(req.getParameter(Constantes.PAR_PROFESOR));
 		
-		} catch (ParseException e) {
-				System.out.println(e.getMessage());
+		} catch (Exception e) {
+			System.out.println("Error recogiendo parametros " + e.getMessage());
+			throw new Exception( e.getMessage());
 		}
 		return curso;
 	}
@@ -138,7 +137,7 @@ public class CursoServlet extends HttpServlet{
 
 	@Override
 	public void destroy() {
-		cS = null;
+		this.cS = null;
 		super.destroy();
 	}
 }
