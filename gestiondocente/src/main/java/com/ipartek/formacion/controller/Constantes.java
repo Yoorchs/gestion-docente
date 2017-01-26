@@ -5,9 +5,9 @@ public class Constantes {
 	}
 	
 	// Nombres de atributos
-	public static final String ATT_LISTADO_PROFESORES = "listado-profesores";
-	public static final String ATT_LISTADO_ALUMNOS = "listado-alumnos";
-	public static final String ATT_LISTADO_CURSOS = "listado-cursos";
+	public static final String ATT_LISTADO_PROFESORES = "listadoProfesores";
+	public static final String ATT_LISTADO_ALUMNOS = "listadoAlumnos";
+	public static final String ATT_LISTADO_CURSOS = "listadoCursos";
 	public static final String ATT_MENSAJE = "mensaje";
 	public static final String ATT_ALUMNO = "alumno";
 	public static final String ATT_PROFESOR = "profesor";
