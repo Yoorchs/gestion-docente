@@ -1,9 +1,13 @@
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %> 
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@page import="com.ipartek.formacion.controller.Constantes"%>
+<c:set var="language" value="${not empty sessionScope.language ? sessionScope.language : 'es_ES'}" scope="session" />
+<fmt:setLocale value="${language}" />
+<fmt:setBundle basename="com.ipartek.formacion.controller.i18nmessages" /> 
 <!DOCTYPE html>
-<html>
+<html lang="${languaje}">
 <head>
 <meta charset="UTF-8">
 <title>Página Inicial</title>
@@ -19,6 +23,9 @@
 			<li><a href=" <%= Constantes.SERVLET_PROFESOR  %>?<%=Constantes.PAR_OPERACION %>=<%=Constantes.OP_READ %>">G. Profesores</a></li>
 			<li><a href="<%= Constantes.SERVLET_CURSO  %>?<%=Constantes.PAR_OPERACION %>=<%=Constantes.OP_READ %>">G. Cursos</a></li>
 		</ul>
+		<a href="<%= Constantes.SERVLET_IDIOMA %>?<%= Constantes.PAR_IDIOMA %>=<%=Constantes.IDIOMA_CASTELLANO%>">Castellano </a>
+		<a href="<%= Constantes.SERVLET_IDIOMA %>?<%= Constantes.PAR_IDIOMA %>=<%=Constantes.IDIOMA_EUSKERA%>">Euskera </a>
+		<a href="<%= Constantes.SERVLET_IDIOMA %>?<%= Constantes.PAR_IDIOMA %>=<%=Constantes.IDIOMA_INGLES%>">Inglés </a>
 	</nav>
 	<jsp:include page="mensajes.jsp"></jsp:include>
 </header>
