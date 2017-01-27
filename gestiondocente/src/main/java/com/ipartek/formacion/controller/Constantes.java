@@ -12,7 +12,7 @@ public class Constantes {
 	public static final String ATT_ALUMNO = "alumno";
 	public static final String ATT_PROFESOR = "profesor";
 	public static final String ATT_CURSO = "curso";
-
+	
 	// Variable de sesion 
 	public static final String SESSION_IDIOMA = "language";
 	
@@ -21,6 +21,7 @@ public class Constantes {
 	public static final String SERVLET_PROFESOR = "profesor.do";
 	public static final String SERVLET_CURSO = "curso.do";
 	public static final String SERVLET_IDIOMA = "idioma.do";
+	public static final String SERVLET_LOGIN = "login.do";
 	
 	// Rutas de las JSPs
 	public static final String JSP_LISTADO_ALUMNOS = "alumnos/listado.jsp";
@@ -49,6 +50,8 @@ public class Constantes {
 	public static final String PAR_LISTADO_ALUMNOS = "alumnos";
 	public static final String PAR_PROFESOR = "alumnos";
 	public static final String PAR_IDIOMA = "idioma";
+	public static final String PAR_USUARIO = "usuario";
+	public static final String PAR_PASSWORD = "password";
 	
 	// Constantes para las operaciones
 	public static final int OP_CREATE = 1;
