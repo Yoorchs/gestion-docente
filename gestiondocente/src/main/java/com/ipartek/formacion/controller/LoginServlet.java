@@ -1,9 +1,6 @@
 package com.ipartek.formacion.controller;
 
 import java.io.IOException;
-import java.util.Locale;
-import java.util.ResourceBundle;
-
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
@@ -45,8 +42,8 @@ public class LoginServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		Locale locale = new Locale("es_ES");
+		
+		/*Locale locale = new Locale("es_ES");
 		//Obtiene el atributo lenguaje de la sesion
 		//Si al recoger la sesion se le pasa true o nada, si no existe la sesion, se crea
 		//Si es false, obtiene la ya existente y si no existe una, peta
@@ -61,9 +58,19 @@ public class LoginServlet extends HttpServlet {
 			System.out.println("Error :" + e.getMessage());
 		}
 		rd = request.getRequestDispatcher(Constantes.JSP_HOME);
-		rd.forward(request, response);
+		rd.forward(request, response);*/
+		cerrarSesion(request); 
+		response.sendRedirect(Constantes.JSP_HOME);
+		return;
 	}
 
+	private void cerrarSesion(HttpServletRequest request){
+		HttpSession session = request.getSession(false);
+		if (session != null){
+			session.invalidate();
+		}
+	}
+	
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
