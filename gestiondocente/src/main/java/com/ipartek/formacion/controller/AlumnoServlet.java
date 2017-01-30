@@ -10,6 +10,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.log4j.Logger;
+
 import com.ipartek.formacion.dbms.pojo.Alumno;
 import com.ipartek.formacion.service.AlumnoService;
 import com.ipartek.formacion.service.AlumnoServiceImp;
@@ -18,6 +20,7 @@ import com.ipartek.formacion.service.AlumnoServiceImp;
  * Servlet implementation class AlumnoServlet
  */
 public class AlumnoServlet extends HttpServlet {
+	private static final Logger LOG = Logger.getLogger(AlumnoServlet.class);
 	private static final long serialVersionUID = 1L;
 	private AlumnoService aS;
 	private RequestDispatcher rd;
@@ -75,6 +78,7 @@ public class AlumnoServlet extends HttpServlet {
 		} catch (Exception e) {
 			// cargarListaAlumnos(request);	
 			// Se redirige a la pagina principal en caso de que haya un error en el parametro de la request
+			LOG.error(e.getMessage() + "Valor del codigo de alumno: " + request.getParameter(Constantes.PAR_CODIGO));
 			response.sendRedirect(Constantes.JSP_HOME); 
 			return;
 		}
@@ -84,6 +88,7 @@ public class AlumnoServlet extends HttpServlet {
 	}
 
 	private void cargarListaAlumnos(HttpServletRequest request) {
+		LOG.trace(" ");
 		// Tambien se puede redirigir con la siguiente sentencia
 		// response.sendRedirect("alumnos/listado.jsp"); --> Hace una redireccion limpia
 		
@@ -126,6 +131,7 @@ public class AlumnoServlet extends HttpServlet {
 				mensaje = e.getMessage();
 			}
 			System.out.println(mensaje);
+			LOG.error(e.getMessage());
 		}
 		request.setAttribute(Constantes.ATT_MENSAJE, mensaje);
 		rd.forward(request, response);
@@ -153,6 +159,7 @@ public class AlumnoServlet extends HttpServlet {
 			alumno.setfNacimiento(dateformat.parse(fechaNacimiento));
 			
 		}catch (Exception e) {
+			LOG.error(e.getMessage());
 			throw new Exception(" Los datos no son validos " + e.getMessage());
 		}
 		return alumno;

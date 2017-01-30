@@ -15,6 +15,8 @@ public class Constantes {
 	
 	// Variable de sesion 
 	public static final String SESSION_IDIOMA = "language";
+	public static final String SESSION_PERSONA = "persona";
+	public static final String SESSION_LISTADO_USUARIOS = "listadoUsuarios";
 	
 	// Nombres de los servlets
 	public static final String SERVLET_ALUMNO = "alumno.do";
