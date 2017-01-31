@@ -30,7 +30,8 @@
 		if( session!=null && !session.isNew() && session.getAttribute(Constantes.SESSION_IDIOMA)!=null){
 		%>
 <!-- 		Sin parametros ya que va al get donde esta el metodo para cerrar sesion -->
-		<a href="<%=Constantes.SERVLET_LOGIN%>">Cerrar Sesion</a>
+		<p><a href="<%=Constantes.SERVLET_LOGIN%>">Cerrar Sesion</a></p>
+		<p><a href="<%=Constantes.SERVLET_ACTIVOS%>">Listar usuarios activos</a></p>
 		<%
 			}
 		%>

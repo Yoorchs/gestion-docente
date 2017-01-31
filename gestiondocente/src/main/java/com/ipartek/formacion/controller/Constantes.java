@@ -12,11 +12,14 @@ public class Constantes {
 	public static final String ATT_ALUMNO = "alumno";
 	public static final String ATT_PROFESOR = "profesor";
 	public static final String ATT_CURSO = "curso";
+	public static final String ATT_LISTADO_USUARIOS = "listadoUsuarios";
 	
 	// Variable de sesion 
 	public static final String SESSION_IDIOMA = "language";
 	public static final String SESSION_PERSONA = "persona";
-	public static final String SESSION_LISTADO_USUARIOS = "listadoUsuarios";
+	
+	//Variable de contexto
+	public static final String CTX_LISTADO_USUARIOS = "listadoUsuarios";
 	
 	// Nombres de los servlets
 	public static final String SERVLET_ALUMNO = "alumno.do";
@@ -24,6 +27,7 @@ public class Constantes {
 	public static final String SERVLET_CURSO = "curso.do";
 	public static final String SERVLET_IDIOMA = "idioma.do";
 	public static final String SERVLET_LOGIN = "login.do";
+	public static final String SERVLET_ACTIVOS = "listaractivosservlet.do";
 	
 	// Rutas de las JSPs
 	public static final String JSP_LISTADO_ALUMNOS = "alumnos/listado.jsp";
@@ -33,6 +37,7 @@ public class Constantes {
 	public static final String JSP_FORMULARIO_PROFESOR = "profesores/profesor.jsp";
 	public static final String JSP_LISTADO_CURSOS = "cursos/listado.jsp";
 	public static final String JSP_FORMULARIO_CURSO = "cursos/curso.jsp";
+	public static final String JSP_LISTADO_ACTIVOS = "usuarios/listado.jsp"; 
 	
 	// Constantes para los parametros
 	public static final String PAR_OPERACION  = "OP";
@@ -54,6 +59,8 @@ public class Constantes {
 	public static final String PAR_IDIOMA = "idioma";
 	public static final String PAR_USUARIO = "usuario";
 	public static final String PAR_PASSWORD = "password";
+	public static final String PAR_LISTADO_USUARIOS = "listaUsuarios";
+	public static final String PAR_SESSION_ID ="sessionID";
 	
 	// Constantes para las operaciones
 	public static final int OP_CREATE = 1;

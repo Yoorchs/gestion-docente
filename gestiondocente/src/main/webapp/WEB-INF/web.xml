@@ -82,4 +82,14 @@
   <listener>
     <listener-class>com.ipartek.formacion.controller.listeners.SessionListener</listener-class>
   </listener>
+  <servlet>
+    <description>Servlet que controla peticiones para listar usuarios activos en la aplicacion</description>
+    <display-name>ListarActivosServlet</display-name>
+    <servlet-name>ListarActivosServlet</servlet-name>
+    <servlet-class>com.ipartek.formacion.controller.ListarActivosServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ListarActivosServlet</servlet-name>
+    <url-pattern>/listaractivosservlet.do</url-pattern>
+  </servlet-mapping>
 </web-app>

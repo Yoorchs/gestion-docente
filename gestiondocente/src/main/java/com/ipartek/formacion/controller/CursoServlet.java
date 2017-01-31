@@ -8,6 +8,9 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import org.apache.log4j.Logger;
+
 import com.ipartek.formacion.dbms.pojo.Curso;
 import com.ipartek.formacion.service.CursoserviceImp;
 
@@ -17,6 +20,7 @@ public class CursoServlet extends HttpServlet{
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
+	private static final Logger LOG = Logger.getLogger(CursoServlet.class);
 	private CursoserviceImp cS;
 	private RequestDispatcher rd;
 	
@@ -101,7 +105,7 @@ public class CursoServlet extends HttpServlet{
 				req.setAttribute(Constantes.ATT_CURSO, curso);
 				mensaje = e.getMessage();
 			}
-			System.out.println("Error " + mensaje);
+			LOG.trace("Error " + mensaje);
 		}
 		req.setAttribute(Constantes.ATT_MENSAJE, mensaje);
 		rd.forward(req, resp);
@@ -128,7 +132,7 @@ public class CursoServlet extends HttpServlet{
 			// curso.setProfesor(req.getParameter(Constantes.PAR_PROFESOR));
 		
 		} catch (Exception e) {
-			System.out.println("Error recogiendo parametros " + e.getMessage());
+			LOG.error("Error recogiendo parametros " + e.getMessage());
 			throw new Exception( e.getMessage());
 		}
 		return curso;

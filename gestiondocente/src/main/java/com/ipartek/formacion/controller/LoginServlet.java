@@ -48,7 +48,6 @@ public class LoginServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
 		/*Locale locale = new Locale("es_ES");
 		//Obtiene el atributo lenguaje de la sesion
 		//Si al recoger la sesion se le pasa true o nada, si no existe la sesion, se crea
@@ -119,8 +118,10 @@ public class LoginServlet extends HttpServlet {
 			try {
 				p.setNombre(username);
 				p.setApellidos("Anonimo");
+				// Con esto obtenemos la ID de la sesion del usuario y la almacenamos en el atributo
+				p.setSessionID(session.getId());
 				session.setAttribute(Constantes.SESSION_PERSONA, p);
-				LOG.trace(" Usuario " + username + "trata de iniciar sesion");
+				LOG.trace(" Usuario " + username + " trata de iniciar sesion");
 			} catch (PersonaException e) {
 				LOG.error(e.getMessage());
 			}
