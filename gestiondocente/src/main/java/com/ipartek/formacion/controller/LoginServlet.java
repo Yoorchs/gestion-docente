@@ -4,6 +4,7 @@ import java.io.IOException;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -84,6 +85,7 @@ public class LoginServlet extends HttpServlet {
 		final String pass = "admin";
 		String username = request.getParameter(Constantes.PAR_USUARIO);
 		String password = request.getParameter(Constantes.PAR_PASSWORD);
+		String lenguaje = request.getParameter(Constantes.PAR_IDIOMA);
 		
 		// Las condiciones van en orden, user y luego pass
 		// Se compara primero el user con los datos introducidos ya que el valor de user nunca es nulo 
@@ -97,8 +99,34 @@ public class LoginServlet extends HttpServlet {
 			session.setMaxInactiveInterval(60*10);
 			// Cargamos la variable idioma
 			// La guardamos en una variable de sesion
-			String lang = request.getParameter(Constantes.PAR_IDIOMA);
-			int idioma = Integer.parseInt(lang);
+			
+			
+			// Vamos a crear unas cookies
+			String rememberme = request.getParameter(Constantes.PAR_RECUERDAME);
+			
+			// Se le pasa parametro clave y valor
+			Cookie c_username = new Cookie(Constantes.COOKIE_USERNAME, username);
+			Cookie c_password = new Cookie(Constantes.COOKIE_PASSWORD, password);
+			Cookie c_idioma = new Cookie(Constantes.COOKIE_IDIOMA, lenguaje);
+			// Check marcado
+			if (rememberme != null){
+				c_username.setMaxAge(60*60*24);
+				c_password.setMaxAge(60*60*24);
+				c_idioma.setMaxAge(60*60*24);
+			}else{ // Check desmarcado, tiempo de vida de la cookie es 0
+				c_username.setMaxAge(0);
+				c_password.setMaxAge(0);
+				c_idioma.setMaxAge(0);
+			}
+			response.addCookie(c_username);
+			response.addCookie(c_password);
+			response.addCookie(c_idioma);
+			if (c_idioma!=null && c_idioma.getValue()!=null){
+				lenguaje = c_idioma.getValue();
+			}else{
+				lenguaje = request.getParameter(Constantes.PAR_IDIOMA);
+			}
+			int idioma = Integer.parseInt(lenguaje);
 			String locale ="";
 			switch (idioma) {
 			case Constantes.IDIOMA_CASTELLANO:

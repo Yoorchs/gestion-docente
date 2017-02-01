@@ -29,6 +29,11 @@ public class Constantes {
 	public static final String SERVLET_LOGIN = "login.do";
 	public static final String SERVLET_ACTIVOS = "listaractivosservlet.do";
 	
+	// Para las cookies
+	public static final String COOKIE_USERNAME = "username";
+	public static final String COOKIE_PASSWORD = "password";
+	public static final String COOKIE_IDIOMA = "idioma";
+	
 	// Rutas de las JSPs
 	public static final String JSP_LISTADO_ALUMNOS = "alumnos/listado.jsp";
 	public static final String JSP_LISTADO_PROFESORES = "profesores/listado.jsp";
@@ -61,6 +66,7 @@ public class Constantes {
 	public static final String PAR_PASSWORD = "password";
 	public static final String PAR_LISTADO_USUARIOS = "listaUsuarios";
 	public static final String PAR_SESSION_ID ="sessionID";
+	public static final String PAR_RECUERDAME ="recuerdame";
 	
 	// Constantes para las operaciones
 	public static final int OP_CREATE = 1;

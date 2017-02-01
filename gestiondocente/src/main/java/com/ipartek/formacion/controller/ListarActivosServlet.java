@@ -54,7 +54,7 @@ public class ListarActivosServlet extends HttpServlet {
 		String sessionID = request.getParameter(Constantes.PAR_SESSION_ID);
 		if (sessionID == null) {
 			try {
-				HttpSession session = request.getSession();
+				HttpSession session = request.getSession(false);
 				ServletContext ctx = session.getServletContext();
 				List<Persona> personas = null;
 				personas = (List<Persona>) ctx.getAttribute(Constantes.CTX_LISTADO_USUARIOS);
